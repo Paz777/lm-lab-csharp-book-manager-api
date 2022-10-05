@@ -35,7 +35,7 @@ public class BookManagerControllerTests
         //Assert
         result.Should().BeOfType(typeof(ActionResult<IEnumerable<Book>>));
         result.Value.Should().BeEquivalentTo(GetTestBooks());
-        result.Value.Count().Should().Be(3);
+        result.Value.Count().Should().Be(4);
     }
 
     [Test]
@@ -87,6 +87,19 @@ public class BookManagerControllerTests
         result.Should().BeOfType(typeof(ActionResult<Book>));
     }
 
+    [Test]
+    public void DeleteBook_Deletes_A_Book_By_Id()
+    {
+        long bookId = 4353427;
+        _mockBookManagementService.Setup(b => b.DeleteBookById(bookId)).Returns(true);
+
+        var result = _controller.DeleteBookById(bookId);
+
+        result.Should().Be(true);
+    }
+
+
+
     private static List<Book> GetTestBooks()
     {
         return new List<Book>
@@ -94,6 +107,7 @@ public class BookManagerControllerTests
             new Book() { Id = 1, Title = "Book One", Description = "This is the description for Book One", Author = "Person One", Genre = Genre.Education },
             new Book() { Id = 2, Title = "Book Two", Description = "This is the description for Book Two", Author = "Person Two", Genre = Genre.Fantasy },
             new Book() { Id = 3, Title = "Book Three", Description = "This is the description for Book Three", Author = "Person Three", Genre = Genre.Thriller },
-        };
+            new Book() { Id = 5, Title = "Book Five", Description = "Description of book 5", Author = "Paz", Genre = Genre.Thriller },
+    };
     }
 }
