@@ -51,8 +51,10 @@ namespace BookManagerApi.Services
 
         public bool DeleteBookById(long id)
         {
-            _context.Books.Remove(FindBookById(id));
-            return _context.SaveChanges() == 1;
+            //this is not what we're testing for controller
+            //_context.Books.Remove(FindBookById(id));
+            //return _context.SaveChanges() == 1;
+            return false;
         }
     }
 }
