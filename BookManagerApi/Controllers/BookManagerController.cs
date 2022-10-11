@@ -53,7 +53,7 @@ namespace BookManagerApi.Controllers
         {
             if (_bookManagementService.DeleteBookById(id))
             {
-                return new NoContentResult();
+                return NoContent();
             }
             else
             {
