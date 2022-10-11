@@ -90,12 +90,23 @@ public class BookManagerControllerTests
     [Test]
     public void DeleteBook_Deletes_A_Book_By_Id()
     {
-        long bookId = 4353427;
+        long bookId = 6;
         _mockBookManagementService.Setup(b => b.DeleteBookById(bookId)).Returns(true);
 
-        var result = _controller.DeleteBookById(bookId);
+        var result = _controller.DeleteBook(bookId);
 
-        result.Should().Be(true);
+        result.Should().BeOfType(typeof(NoContentResult));
+    }
+
+    [Test]
+    public void DeleteBook_Can_Not_Delete_A_Book_By_Id()
+    {
+        long bookId = 23432;
+        _mockBookManagementService.Setup(b => b.DeleteBookById(bookId)).Returns(false);
+
+        var result = _controller.DeleteBook(bookId);
+
+        result.Should().BeOfType(typeof(NotFoundResult));
     }
 
 

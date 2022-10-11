@@ -49,9 +49,16 @@ namespace BookManagerApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public bool DeleteBookById(long id)
+        public IActionResult DeleteBook(long id)
         {
-            return _bookManagementService.DeleteBookById(id);
+            if (_bookManagementService.DeleteBookById(id))
+            {
+                return new NoContentResult();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }
